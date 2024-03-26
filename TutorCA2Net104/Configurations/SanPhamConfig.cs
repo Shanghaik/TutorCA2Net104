@@ -14,7 +14,7 @@ namespace TutorCA2Net104.Configurations
             builder.HasKey(x => x.Id); // Khóa chính
             // builder.HasKey(x=> new { x.Id, x.Name }); // Khóa Composite - nhiều cột
             builder.Property(x => x.Name).IsRequired().HasColumnName("Tên SP");
-            builder.Property(x=>x.Description).IsRequired().HasColumnType("nvarchar(100");
+            builder.Property(x=>x.Description).IsRequired().HasColumnType("nvarchar(100)");
 
         }
     }

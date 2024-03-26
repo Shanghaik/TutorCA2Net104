@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TutorCA2Net104.Models;
 
@@ -11,9 +12,10 @@ using TutorCA2Net104.Models;
 namespace TutorCA2Net104.Migrations
 {
     [DbContext(typeof(DemoCode1stContext))]
-    partial class DemoCode1stContextModelSnapshot : ModelSnapshot
+    [Migration("20240326024854_hihi")]
+    partial class hihi
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

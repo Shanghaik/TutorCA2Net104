@@ -1,0 +1,23 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    
+</head>
+<body>
+    <div class="container">
+        <h1>Chào mừng bạn tới đây để bị bán bóp</h1>
+        <form asp-action="Login" asp-controller="Home" method="post">
+            <label>Email:</label><br />
+            <input type="text" name="email" /><br />
+
+            <label>Số điện thoại:</label><br />
+            <input type="text" name="sdt" /><br />
+
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html>

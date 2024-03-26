@@ -1,4 +1,4 @@
-namespace TutorCA2Net104
+﻿namespace TutorCA2Net104
 {
     public class Program
     {
@@ -26,9 +26,9 @@ namespace TutorCA2Net104
 
             app.UseAuthorization();
 
-            app.MapControllerRoute(
+            app.MapControllerRoute( // ĐƯờng dẫn mặc định khi chạy chương trình
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=Home}/{action=Login}");
 
             app.Run();
         }
