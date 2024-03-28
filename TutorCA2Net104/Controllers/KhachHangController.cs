@@ -23,70 +23,81 @@ namespace TutorCA2Net104.Controllers
         public ActionResult Details(string sdt)
         {
             var khachhang = context.KhachHangs.ToList().FirstOrDefault(p => p.Sdt == sdt);
-            return View(khachhang);
+            return View(khachhang); // Truyền 1 đối tượng sang view
         }
 
         // GET: KhachHangController/Create
-        public ActionResult Create()
+        public ActionResult Create() // Mở view
         {
             return View();
         }
 
         // POST: KhachHangController/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(KhachHang khachhang) // Thực hiện thao tác
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                context.KhachHangs.Add(khachhang);
+                context.SaveChanges();  
+                return RedirectToAction("Index", "KhachHang"); // Chuyển hướng khi thêm thành công
             }
             catch
             {
-                return View();
+                return Content("Thêm thất bại");
             }
         }
 
         // GET: KhachHangController/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult Edit(string sdt) // Action này để mở View và truyền đối tượng đã có sang
         {
-            return View();
+            var editKH = context.KhachHangs.Find(sdt); // Tìm thông tin đối tượng cần sửa theo ID
+            return View(editKH);
         }
 
-        // POST: KhachHangController/Edit/5
+        // POST: KhachHangController/Edit
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(KhachHang khachhang) // Action này để thực hiện việc sửa theo data nhập vào
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                var editKH = context.KhachHangs.Find(khachhang.Sdt); // Tìm chính xác tới đối tượng cần sửa
+                editKH.Email = khachhang.Email;
+                editKH.Diachi = khachhang.Diachi;
+                editKH.Status = khachhang.Status;
+                // Tobe Continue (Chưa full thuộc tính đâu =)))
+                context.Update(editKH);
+                context.SaveChanges();
+                return RedirectToAction("Index");
             }
             catch
             {
-                return View();
+                return BadRequest();
             }
         }
 
         // GET: KhachHangController/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string sdt)
         {
-            return View();
+            var deleteKH = context.KhachHangs.Find(sdt); // Tìm đối tượng để xóa theo SDT
+            context.KhachHangs.Remove(deleteKH);    
+            context.SaveChanges();
+            return RedirectToAction("Index");
         }
 
         // POST: KhachHangController/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        //[HttpPost]
+        //[ValidateAntiForgeryToken]
+        //public ActionResult Delete(int id, IFormCollection collection)
+        //{
+        //    try
+        //    {
+        //        return RedirectToAction(nameof(Index));
+        //    }
+        //    catch
+        //    {
+        //        return View();
+        //    }
+        //}
     }
 }
