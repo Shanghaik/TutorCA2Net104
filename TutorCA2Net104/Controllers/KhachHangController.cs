@@ -15,11 +15,12 @@ namespace TutorCA2Net104.Controllers
         // GET: KhachHangController
         public ActionResult Index(string name) // Hiển thị ra tất cả các Khách hàng đang có
         {
-            var listKH = context.KhachHangs.Where(p => p.Ten==(name)).ToList();
+            var listKH = context.KhachHangs.Where(p => p.Ten.Contains(name)).ToList(); // danh sách tìm được
             var khachhangs = context.KhachHangs.ToList(); // Lấy ra từ DB thông qua DBSet 
             // Truyền dữ liệu sang View
-            if (listKH.Count!=0) return View(listKH);
-            return View(khachhangs);
+            ViewData["count"] = listKH.Count; // Số lượng kết quá tìm được
+            if (listKH.Count != 0) return View(listKH); // Nếu tìm thấy
+            return View(khachhangs); // Không tìm thấy thì trả về danh sách full
         }
 
         // GET: KhachHangController/Details/5
@@ -42,7 +43,7 @@ namespace TutorCA2Net104.Controllers
             try
             {
                 context.KhachHangs.Add(khachhang);
-                context.SaveChanges();  
+                context.SaveChanges();
                 return RedirectToAction("Index", "KhachHang"); // Chuyển hướng khi thêm thành công
             }
             catch
@@ -83,7 +84,7 @@ namespace TutorCA2Net104.Controllers
         public ActionResult Delete(string sdt)
         {
             var deleteKH = context.KhachHangs.Find(sdt); // Tìm đối tượng để xóa theo SDT
-            context.KhachHangs.Remove(deleteKH);    
+            context.KhachHangs.Remove(deleteKH);
             context.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -102,6 +103,6 @@ namespace TutorCA2Net104.Controllers
         //        return View();
         //    }
         //}
-        
+
     }
 }

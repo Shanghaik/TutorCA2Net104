@@ -2,15 +2,23 @@
 
 @{
     ViewData["Title"] = "Index";
-    var searchLst = TempData["searchLst"];
+    var count = (int)ViewData["count"];
 }
 
 <h1>Index</h1>
-<form action="/KhachHang/Index" method="get">
+<form action="/KhachHang/Index" method="get"> @*Tìm kiếm*@
     <label for="searchBox">Tên:</label>
     <input type="text" id="searchBox" name="name">
     <input type="submit" value="Search">
 </form>
+@if (count == 0)
+{
+    <h4>Không thấy gì cả</h4>
+}
+else
+{
+    <h4>Tìm thấy @count kết quả</h4>
+}
 <p>
     <a asp-action="Create">Create New</a>
 </p>
