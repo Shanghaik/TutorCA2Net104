@@ -2,10 +2,15 @@
 
 @{
     ViewData["Title"] = "Index";
+    var searchLst = TempData["searchLst"];
 }
 
 <h1>Index</h1>
-
+<form action="/KhachHang/Index" method="get">
+    <label for="searchBox">Tên:</label>
+    <input type="text" id="searchBox" name="name">
+    <input type="submit" value="Search">
+</form>
 <p>
     <a asp-action="Create">Create New</a>
 </p>

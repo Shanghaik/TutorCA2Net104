@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Xml.Linq;
 using TutorCA2Net104.Models;
 
 namespace TutorCA2Net104.Controllers
@@ -12,10 +13,12 @@ namespace TutorCA2Net104.Controllers
             context = new DemoCode1stContext();
         }
         // GET: KhachHangController
-        public ActionResult Index() // Hiển thị ra tất cả các Khách hàng đang có
+        public ActionResult Index(string name) // Hiển thị ra tất cả các Khách hàng đang có
         {
+            var listKH = context.KhachHangs.Where(p => p.Ten==(name)).ToList();
             var khachhangs = context.KhachHangs.ToList(); // Lấy ra từ DB thông qua DBSet 
             // Truyền dữ liệu sang View
+            if (listKH.Count!=0) return View(listKH);
             return View(khachhangs);
         }
 
@@ -99,5 +102,6 @@ namespace TutorCA2Net104.Controllers
         //        return View();
         //    }
         //}
+        
     }
 }
